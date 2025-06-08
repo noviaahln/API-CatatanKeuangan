@@ -10,13 +10,13 @@ namespace CatatanKeuangan.Helpers
     public class JwtHelper
     {
         private readonly IConfiguration _configuration;
-
+         
         public JwtHelper(IConfiguration configuration)
         {
             _configuration = configuration;
         }
         public string GenerateToken(Pengguna pengguna)
-        {
+        { 
             var tokenHandler = new JwtSecurityTokenHandler();
             var key = Encoding.ASCII.GetBytes(_configuration["Jwt:Key"]);
             var tokenDescriptor = new SecurityTokenDescriptor
@@ -33,5 +33,5 @@ namespace CatatanKeuangan.Helpers
             var token = tokenHandler.CreateToken(tokenDescriptor);
             return tokenHandler.WriteToken(token);
         }
-    }  
+    }   
 }
