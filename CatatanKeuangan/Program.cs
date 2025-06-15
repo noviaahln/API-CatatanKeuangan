@@ -70,6 +70,12 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
 
 builder.Services.Configure<EncryptionSettings>(builder.Configuration.GetSection("Encryption"));
 builder.Services.AddSingleton<AesEncryptionHelper>();
+builder.WebHost.ConfigureKestrel(serverOptions =>
+{
+    var port = Environment.GetEnvironmentVariable("PORT") ?? "5000";
+    serverOptions.ListenAnyIP(int.Parse(port));
+});
+
 
 var app = builder.Build();
 
